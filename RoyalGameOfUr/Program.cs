@@ -10,6 +10,7 @@ namespace RoyalGameOfUr
     {
         static void Main(string[] args)
         {
+            // test
         }
     }
 }
