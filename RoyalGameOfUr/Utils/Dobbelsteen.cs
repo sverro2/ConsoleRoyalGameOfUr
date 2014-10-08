@@ -12,7 +12,7 @@ namespace RoyalGameOfUr.Utils
 
         public static int Gooi()
         {
-            return random.Next(5);
+            return random.Next(4);
         }
     }
 }

@@ -56,6 +56,10 @@ namespace RoyalGameOfUr.Utils
             speler1Route.AddLast(new Eind());
             speler2Route.AddLast(new Eind());
 
+            // geef de players de gemaakte routes
+            speler1.SetVelden(speler1Route);
+            speler2.SetVelden(speler2Route);
+
         }
     }
 }
