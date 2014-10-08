@@ -11,17 +11,8 @@ namespace RoyalGameOfUr.Model
         public string Kleur { get; private set; }
         public LinkedListNode<Veld> VeldNode
         {
-            get
-            {
-                return VeldNode;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    VeldNode = value;
-                }
-            }
+            get;
+            set;
         }
 
         public Stuk(string kleur)
