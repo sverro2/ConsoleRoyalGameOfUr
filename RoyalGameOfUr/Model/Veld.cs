@@ -9,10 +9,12 @@ namespace RoyalGameOfUr.Model
     public class Veld
     {
         public List<Stuk> Stukken { get; private set; }
+        public int random;
 
-        public Veld()
+        public Veld(int veldId)
         {
             Stukken = new List<Stuk>();
+            random = veldId;
         }
 
         public void AddStuk(Stuk stuk)
@@ -60,6 +62,18 @@ namespace RoyalGameOfUr.Model
                 }
             }
             return false;
+        }
+
+        public override string ToString()
+        {
+            if (Stukken.Count != 0)
+            {
+                return Stukken[0].ID;
+            }
+            else
+            {
+                return "--";
+            }
         }
     }
 }

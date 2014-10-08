@@ -1,5 +1,6 @@
 ﻿using RoyalGameOfUr.Model;
 using RoyalGameOfUr.Utils;
+using RoyalGameOfUr.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,27 @@ namespace RoyalGameOfUr.Controller
 
         private Speler speler1;
         private Speler speler2;
+        private int dobbelWaarde;
+
+        //Views
+        Speelbord speelBordView;
 
         public void DoeRonde()
         {
-            int dobbelWaarde = Dobbelsteen.Gooi();
+            dobbelWaarde = Dobbelsteen.Gooi();
+            ConsoleKey key = speelBordView.Besturing(Beurt.playerInt);
+
+            //controlleer of het spel moet worden gestopt of dat een dobbelsteen moet worden gegooid
+            if (key == ConsoleKey.S)
+            {
+                Environment.Exit(0);
+            }
+
             if (dobbelWaarde == 0)
             {
                 // er is 0 gegooid
                 // laat dit weten aan de view, nu is volgende speler aan de beurt
+                speelBordView.ShowStatus("Je hebt 0 gegooid... De volgende speler is aan de beurt.");
                 
             }
 
@@ -78,6 +92,7 @@ namespace RoyalGameOfUr.Controller
                     // er is geen beurt mogelijk met deze dobbelwaarde
                     // laat dit weten aan een view
                     // andere speler nu aan de beurt
+                    speelBordView.ShowStatus("Met de huidige dobbelwaarde is geen beurt mogelijk. De volgende is aan de beurt");
 
                 }
                 else
@@ -147,12 +162,11 @@ namespace RoyalGameOfUr.Controller
 
 
 
-        public int KrijgSpelerInput()
+        public int KrijgSpelerInput(int playerInt)
         {
             // verkrijgt de index van het stuk dat de speler wilt verplaatsen.
-           
-            // return inputView.getUserInput
-            return 0;
+
+            return speelBordView.UserInput(playerInt, dobbelWaarde);
         }
 
         public void Start()
@@ -160,16 +174,20 @@ namespace RoyalGameOfUr.Controller
             speler1 = new Speler(this, 0);
             speler2 = new Speler(this, 1);
 
+
             Beurt = speler1;
             Tegenstander = speler2;
 
             Bord.NieuwBord(speler1, speler2);
+            speelBordView = new Speelbord(speler1, speler2);
 
             while (SpelBezig())
             {
                 DoeRonde();
 
             }
+
+
         }
 
         public bool SpelBezig()

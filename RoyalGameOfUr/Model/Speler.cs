@@ -10,6 +10,7 @@ namespace RoyalGameOfUr.Model
     public class Speler
     {
         private Spel spel;
+        public int playerInt { get; private set; }
         public LinkedList<Veld> Velden
         { 
             private set;
@@ -23,25 +24,26 @@ namespace RoyalGameOfUr.Model
 
         public Speler(Spel spel, int speler)
         {
+            playerInt = speler;
             // stukken aanmaken
             this.spel = spel;
 
             Stukken = new List<Stuk>();
             string stukKleur = "zwart";
-            if (speler == 1)
+            if (speler == 0)
             {
                 stukKleur = "wit";
             }
 
             for (int i = 0; i < 6; i++)
             {
-                Stukken.Add(new Stuk(stukKleur));
+                Stukken.Add(new Stuk(stukKleur, i+1));
             }
         }
 
         public string DoeBeurt(int dobbelWaarde)
         {
-            int stukIndex = spel.KrijgSpelerInput();
+            int stukIndex = spel.KrijgSpelerInput(playerInt);
 
             Stuk stuk = Stukken[stukIndex];
 
