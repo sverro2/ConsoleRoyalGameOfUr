@@ -93,6 +93,11 @@ namespace RoyalGameOfUr.Controller
                         klaarBeurt = true;
                         switch (success)
                         {
+                            case "fail-end":
+                                // deze steen staat al op t einde
+                                // view
+                                klaarBeurt = false;
+                                break;
                             case "fail-taken":
                                 // er is al een stuk van jezelf op het target veld
                                 // view

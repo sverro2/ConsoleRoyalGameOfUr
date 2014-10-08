@@ -46,6 +46,10 @@ namespace RoyalGameOfUr.Model
             Stuk stuk = Stukken[stukIndex];
 
             LinkedListNode<Veld> node = stuk.VeldNode;
+            if (node.Value is Eind)
+            {
+                return "fail-end";
+            }
             for (int i = 0; i < dobbelWaarde; i++)
             {
                 node = node.Next;
